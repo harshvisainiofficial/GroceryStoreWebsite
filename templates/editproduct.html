@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+</head>
+<body>
+    <h1>Edit as you please</h1>
+    <br>
+    {% for item in data %}
+    <table  style="border: 1px solid black; padding: 8px;">
+        <tr>
+            <td>
+                <form action="{{url_for('changeproduct', category_id=item.category_id, category_name=category_name, product_id=product_id)}}", method="post">
+                    category_id: <input type="text" name="category_id", id="category_id" value="{{category_id}}" readonly>
+                    <br>
+                    name: <input type="text", name="product_name", id="product_name", value="{{item.product_name}}">
+                    <br>
+                    price: <input type="text", name="price", id="price", value="{{item.price}}">
+                    <br>
+                    stock: <input type="number", name="stock", id="stock", value="{{item.stock}}">
+                    <br>
+                    manufacturing date: <input type="text", name="manufacturing_date", id="manufacturing_date", value="{{item.manufacturing_date}}">
+                    <br>
+                    expiry date: <input type="text", name="expiry_date", id="expiry_date", value="{{item.expiry_date}}">
+                    <br>
+                    <button type="submit">Save Changes</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    {% endfor %}
+</body>
+</html>

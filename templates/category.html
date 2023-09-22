@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-xx/Yn4xXB50u4Z/FMVlnjsGdYjw69mJ6SwqmhTAuFp4lCq2sq8EuWdmKwe1hdt7cIX+TApQDy90STgHxF3aXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="static\css\button.css">
+</head>
+<body>
+    <header>
+        <a href="{{url_for('home')}}" style="font-size: 20px;">Home</a> |
+        <a href="{{url_for('admin_login')}}" style="font-size: 20px;">Login</a>
+    </header>
+    <h1><b>CATEGORIES</b></h1>
+    <form action="/addcategory", method='POST'>
+        <input type="text" name="category_name" id ="category_name" placeholder="type the category name">
+        <button type="submit" id ="product">Add New Category</button>
+    </form>
+    <br>
+    <h2>Currently presented category</h2>
+    <br>
+    <table style="border: 1px solid black; padding: 8px;">
+        {% for item in data %}
+        <tr>
+            <td style="border: 1px solid black; padding: 8px;">{{item.category_name}}({{item.category_id}})</td>
+            <td style="border: 1px solid black; padding: 8px;">
+                <form action="{{ url_for('editcategory', category_name=item.category_name , category_id= item.category_id) }}" method="GET">
+                    <button type="submit" id="edit" name="edit">Edit</button >
+                </form>  
+            </td>
+            <td style="border: 1px solid black; padding: 8px;">
+                <form action="{{ url_for('deletecategory', category_id=item.category_id) }}" method="POST">
+                    <button type="submit" id="delete" name="delete">Del</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

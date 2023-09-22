@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shopping store</title>
+    <link rel="stylesheets" type="text/css" href="static\css\circle.css">
+</head>
+<body>
+    <header>
+        <a href="{{url_for('home')}}" style="font-size: 20px;">Home</a> |
+        <a href="{{url_for('login', msg='Login below if already registered')}}" style="font-size: 20px;">Login</a> |
+        <a href="{{url_for('opencart', bag_id=bag_id)}}" style="font-size: 20px;">Cart</a>
+    </header>
+    <h1>Welcome User, what do you wanna buy today??</h1>
+    <form action="{{url_for('search', bag_id=bag_id, email_id=email_id)}}" method="post">
+        <input type="text" name="search_query" placeholder="Search for products or categories">
+        <button type="submit">Search</button>
+    </form>
+    <h4>Searched Items</h4>
+        <!-- Display matched categories and products -->
+    {% for category in matched_categories %}
+    <div class="container">
+        <div class="content">
+            <h2>{{category.category_name}}</h2>
+            <table style="border: 1px solid black; padding: 8px;">
+                <tr>
+                    {% for item2 in data2 %}
+                    {% if category.category_id == item2.category_id %}
+                    <td style="border: 1px solid black; padding: 8px;">
+                    <h3>{{item2.product_name}}</h3>
+                    Price in rupees: {{item2.price}}
+                    <br>
+                    {% if item2.stock == 0 %}
+                      <button>Out of stock</button>
+                    {% else %}
+                        <form action="{{url_for('addtocart', bag_id=bag_id, product_id=item2.product_id, email_id=email_id)}}", method="post">
+                            <button>Buy</button>
+                        </form>
+                    {% endif %}
+                    </td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
+    </div>
+    {% endfor %}
+    <br>
+    {% for product in matched_products %}
+    <div class="container">
+        <div class="content">
+            <table>
+                <tr>
+                    {% for item2 in data2 %}
+                    {% if item2.product_id == product.product_id %}
+                    <td style="border: 1px solid black; padding: 8px;">
+                    <h3>{{item2.product_name}}</h3>
+                    Price in rupees: {{item2.price}}
+                    <br>
+                    {% if item2.stock == 0 %}
+                      <button>Out of stock</button>
+                    {% else %}
+                        <form action="{{url_for('addtocart', bag_id=bag_id, product_id=item2.product_id, email_id=email_id)}}", method="post">
+                            <button>Buy</button>
+                        </form>
+                    {% endif %}
+                    </td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
+    </div>
+    {% endfor %}
+    
+    <hr>
+
+    {% for item1 in data1 %}
+    <div class="container">
+        <div class="content">
+            <h2>{{item1.category_name}}</h2>
+            <table style="border: 1px solid black; padding: 8px;">
+                <tr>
+                    {% for item2 in data2 %}
+                    {% if item1.category_id == item2.category_id %}
+                    <td style="border: 1px solid black; padding: 8px;">
+                    <h3>{{item2.product_name}}</h3>
+                    Price in rupees: {{item2.price}}
+                    <br>
+                    {% if item2.stock == 0 %}
+                      <button>Out of stock</button>
+                    {% elif item2.product_id in data %}
+                        <button>Added to cart</button>
+                    {% else %}
+                        <form action="{{url_for('addtocart', bag_id=bag_id, product_id=item2.product_id, email_id=email_id)}}", method="post">
+                            <button>Buy</button>
+                        </form>
+                    {% endif %}
+                    </td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+</html>

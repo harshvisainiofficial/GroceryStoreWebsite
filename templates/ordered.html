@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order is successful</title>
+</head>
+<body>
+    <header>
+        <a href="{{url_for('home')}}" style="font-size: 20px;">Home</a> |
+        <a href="{{url_for('login', msg='Login below if already registered')}}" style="font-size: 20px;">LogOut</a>
+    </header>
+    <h1>Your Order</h1>
+    <table style="border: 1px solid black; padding: 8px;">
+        <thead>
+            <th style="border: 1px solid black; padding: 8px;">Name</th>
+            <th style="border: 1px solid black; padding: 8px;">Price</th>
+            <th style="border: 1px solid black; padding: 8px;">Quantity</th>
+            <th style="border: 1px solid black; padding: 8px;">Rate</th>
+        </thead>
+        {% for item1 in data1 %}
+            {% for item2 in data2 %}
+                {% if item2.product_id == item1.product_id%}
+                    <tr>
+                        <td style="border: 1px solid black; padding: 8px;">{{ item2.product_name }}</td>
+                        <td style="border: 1px solid black; padding: 8px;">{{ item2.price }}</td>
+                        <td style="border: 1px solid black; padding: 8px;">{{ item1.quantity }}</td>
+                        <td style="border: 1px solid black; padding: 8px;">{{ item1.price }}</td>
+                    </tr style="border: 1px solid black; padding: 8px;">
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        <tr>
+            <td colspan="2" style="border: 1px solid black; padding: 8px;">Total</td>
+            <td colspan="2" style="border: 1px solid black; padding: 8px;">{{ total }}</td>
+        </tr>
+    </table>
+    
+    <h1>Your order is successfully made !!!!</h1>
+    <h1>Thank you for shopping with <b color="Green">Sabji_lelo.com</b> 😊❤️</h1>
+</body>
+</html>

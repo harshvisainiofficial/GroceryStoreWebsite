@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>editcategory</title>
+</head>
+<body>
+    <header>
+        <a href="{{url_for('home')}}" style="font-size: 20px;">Home</a> |
+        <a href="{{url_for('user_login')}}" style="font-size: 20px;">Login</a> |
+        <a href="{{url_for('addcategory')}}" style="font-size: 20px;">CategoryPage</a>
+    </header>
+    <h1><b>{{category_name}}</b></h1>
+    <form action="{{ url_for('changecategory',  category_id=category_id) }}", method="POST">
+        <h3>Type here to change the name<h3>
+        <input type="text" name="category_name" value="{{category_name}}">
+        <button type="submit">Save changes</button>
+    </form>
+    <br>
+    <br>
+    <h3>Add new product from here</h3>
+    <table  style="border: 1px solid black; padding: 8px;">
+        <tr>
+            <td>
+                <form action="{{ url_for('addproduct', category_name=category_name , category_id=category_id) }}", method="POST">
+                    category_id: <input type="text" name="category_id", id="category_id" value="{{category_id}}" readonly>
+                    <br>
+                    name: <input type="text", name="product_name", id="product_name", placeholder="name of the product">
+                    <br>
+                    price: <input type="text", name="price", id="price", placeholder="price per unit">
+                    <br>
+                    stock: <input type="number", name="stock", id="stock", placeholder="Quantity in stock">
+                    <br>
+                    manufacturing date: <input type="text", name="manufacturing_date", id="manufacturing_date", placeholder="manufactured on">
+                    <br>
+                    expiry date: <input type="text", name="expiry_date", id="expiry_date", placeholder="will expire till">
+                    <br>
+                    <button type="submit">Add to store</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <h2>Currently available products in {{category_name}} category</h2>
+    <br>
+    <table style="border: 1px solid black; padding: 8px;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black; padding: 8px;">product_name</th>
+                <th style="border: 1px solid black; padding: 8px;">price</th>
+                <th style="border: 1px solid black; padding: 8px;">stock</th>
+                <th style="border: 1px solid black; padding: 8px;">manufacturing_date</th>
+                <th style="border: 1px solid black; padding: 8px;">expiry_date</th>
+                <th style="border: 1px solid black; padding: 8px;">Edit</th>
+                <th style="border: 1px solid black; padding: 8px;">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td style="border: 1px solid black; padding: 8px;">{{item.product_name}}</td>
+                <td style="border: 1px solid black; padding: 8px;">{{item.price}}</td></form>
+                <td style="border: 1px solid black; padding: 8px;">{{item.stock}}</td>
+                <td style="border: 1px solid black; padding: 8px;">{{item.manufacturing_date}}</td>
+                <td style="border: 1px solid black; padding: 8px;">{{item.expiry_date}}</td>
+                <td style="border: 1px solid black; padding: 8px;"><form action="{{ url_for('editproduct', product_id=item.product_id, category_id=category_id) }}" method="POST"><button>Edit</button></form></td>
+                <td style="border: 1px solid black; padding: 8px;"><form action="{{ url_for('deleteproduct', product_id=item.product_id, category_id=category_id) }}" method="POST"><button>Delete</button></form></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

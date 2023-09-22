@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .boxed-row {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="{{url_for('home')}}" style="font-size: 20px;">Home</a> |
+        <a href="{{url_for('login',  msg='Login below if already registered')}}" style="font-size: 20px;">Login</a>
+    </header>
+    <h1>CART</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <p style="color: red;">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}  
+    {% endwith %}
+    <table>
+        {% for item1 in data1 %}
+            {% for item2 in data2 %}
+                {% if item2.product_id == item1.product_id %}
+                    <tr class="boxed-row" style="border: 1px solid black; padding: 8px;">
+                        <form action="{{url_for('confirmproduct', bag_id=bag_id, sr_no=item1.sr_no, price=item2.price, product_id=item2.product_id)}}", method='POST'>
+                            Name: {{item2.product_name}}
+                            <br>
+                            Price: <span class="price" data-price="{{ item1.price }}">{{ item1.price }}</span>
+                            <br>
+                            Quantity: <input type="number" class="quantityInput" name="quantity" min="1" value="{{ item1.quantity }}">
+                            <br>
+                            Manufacturing date: {{item2.manufacturing_date}}
+                            <br>
+                            Expiry date: {{item2.expiry_date}}
+                            <br>
+                            <button type="submit">Confirm</button>
+                            
+                        </form>
+                        <form action="{{url_for('deletefromcart', bag_id=bag_id, product_id=item2.product_id)}}", method="post"><button>Delete</button></form>
+                        {% if "available in stock" in message %}
+                            <p style="color: red;">{{ message }}</p>
+                        {% endif %}
+                        <br><br>
+                    </tr>
+                {% endif %}    
+            {% endfor %}
+        {% endfor %}    
+    </table>
+    <h3>Press the below button to confirm the order</h3>
+    <h3>Price: {{ total }}</h3>
+    <form action="{{url_for('orderconfirm', bag_id=bag_id, total=total)}}", method="post"><button>Pay and Continue</button></form>
+
+</body>
+</html>
+
