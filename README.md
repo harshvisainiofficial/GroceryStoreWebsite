@@ -14,18 +14,18 @@ products from any category to the cart and shop them.
 
 # Technologies used
 
-Following are the major technologies used in the project
-● flask
-    ○ Flask
-    ○ render_template 
-    ○ request
-    ○ flash
-    ○ redirect
-    ○ url_for
-● flask_sqlalchemy
-    ○ SQLAlchemy
-● sqlalchemy.exe 
-    ○ Integrityerror
+Following are the major technologies used in the project<br>
+● flask<br><br>
+    ○ Flask<br>
+    ○ render_template <br>
+    ○ request<br>
+    ○ flash<br>
+    ○ redirect<br>
+    ○ url_for<br>
+● flask_sqlalchemy<br><br>
+    ○ SQLAlchemy<br>
+● sqlalchemy.exe <br><br>
+    ○ Integrityerror<br>
 
 The IntegrityError is used to resolve the error made when the unique value constraint of the 
 database is violated.
@@ -33,32 +33,32 @@ database is violated.
 
 # DB Schema Design
 
-● Product
-    ○ product_id :- primary key, auto increment, unique, not null
-    ○ product_name :- unique, not null
-    ○ category_id :- not null, foreign key(category)
-    ○ manufacturing_date 
-    ○ expiry_date 
-    ○ price :- not null
-    ○ stock :- not null
-● category
-    ○ category_id :- primary key, not null, unique, auto increment
-    ○ category_name :- not null, unique
-● user
-    ○ user_id :- primary key, not null, unique, auto increment
-    ○ email_id :- not null, unique 
-    ○ password :- not null
-● bag
-    ○ bag_id :- primary key, not null, unique, auto increment
-    ○ user_id :- not null, foreign key(user)
-    ○ tprice 
-    ○ status :- not null
-● shopping_details
-    ○ sr_no :- primary key, not null, unique, auto increment
-    ○ bag_id :- not null, foreign key(bag)
-    ○ product_id :- not null, foreign key(product)
-    ○ quantity :- not null
-    ○ price :- not null
+● Product<br><br>
+    ○ product_id :- primary key, auto increment, unique, not null<br>
+    ○ product_name :- unique, not null<br>
+    ○ category_id :- not null, foreign key(category)<br>
+    ○ manufacturing_date <br>
+    ○ expiry_date <br>
+    ○ price :- not null<br>
+    ○ stock :- not null<br>
+● category<br><br>
+    ○ category_id :- primary key, not null, unique, auto increment<br>
+    ○ category_name :- not null, unique<br>
+● user<br><br><br>
+    ○ user_id :- primary key, not null, unique, auto increment<br>
+    ○ email_id :- not null, unique <br>
+    ○ password :- not null<br>
+● bag<br><br><br>
+    ○ bag_id :- primary key, not null, unique, auto increment<br>
+    ○ user_id :- not null, foreign key(user)<br>
+    ○ tprice <br>
+    ○ status :- not null<br>
+● shopping_details<br><br>
+    ○ sr_no :- primary key, not null, unique, auto increment<br>
+    ○ bag_id :- not null, foreign key(bag)<br>
+    ○ product_id :- not null, foreign key(product)<br>
+    ○ quantity :- not null<br>
+    ○ price :- not null<br>
 
 The reason behind using this structure was that it was the most sorted and easy to work
 with configuration. Having a single table for bag(1 bag for every time they shop) and
@@ -67,32 +67,32 @@ shopping_details for product information is convenient to store the shopping det
 # API Design
 
 All the APIs have been created using flask, following are the major functionalities for
-which APIs have been created.
-● For the crud functionalities
-● For decreasing the stocks when the product is brought
-● Ability to show a product is out of stock
+which APIs have been created.<br>
+● For the crud functionalities<br>
+● For decreasing the stocks when the product is brought<br>
+● Ability to show a product is out of stock<br>
 ● To make sure that the user has not logged in with invalid user id or password
 
 # Architecture and Features
 
-The project and its code is organised in the following way:
+The project and its code is organised in the following way:<br>
 
-● GroceryStoreWebsite :- This is the main repository.
-    ○ .vscode 
-    ○ __pycache__
-    ○ templates:- It contains the HTML code 
-    ○ app.py:- This is the main page which is running all the templates
-    ○ Grocery Store.db :- This is the database in which all the data is being stored.
+● GroceryStoreWebsite :- This is the main repository.<br><br>
+    ○ .vscode <br>
+    ○ __pycache__<br>
+    ○ templates:- It contains the HTML code <br>
+    ○ app.py:- This is the main page which is running all the templates<br>
+    ○ Grocery Store.db :- This is the database in which all the data is being stored.<br>
 
-The application, on running, will first show two login pages.
+The application, on running, will first show two login pages.<br>
 
-● Admin Login
-● User Login
+● Admin Login<br>
+● User Login<br><br>
 
 ➢ Only the admin can log into the admin login page that also with a specific email ID. Then
 the admin or the store manager can see the categories stored in the database and can
 add, edit or remove them. It is also possible to see the products available in a particular
-category, add new products, edit already added products and delete them if wanted.
+category, add new products, edit already added products and delete them if wanted.<br>
 
 ➢ Any user can login multiple times to the user page, the user then can buy multiple 
 products and add them to cart. The application has the ability to tell the user when the 
