@@ -21,9 +21,9 @@ Following are the major technologies used in the project<br>
     ○ request<br>
     ○ flash<br>
     ○ redirect<br>
-    ○ url_for<br>
+    ○ url_for<br><br>
 ● flask_sqlalchemy<br><br>
-    ○ SQLAlchemy<br>
+    ○ SQLAlchemy<br><br>
 ● sqlalchemy.exe <br><br>
     ○ Integrityerror<br>
 
@@ -40,19 +40,19 @@ database is violated.
     ○ manufacturing_date <br>
     ○ expiry_date <br>
     ○ price :- not null<br>
-    ○ stock :- not null<br>
+    ○ stock :- not null<br><br>
 ● category<br><br>
     ○ category_id :- primary key, not null, unique, auto increment<br>
-    ○ category_name :- not null, unique<br>
+    ○ category_name :- not null, unique<br><br>
 ● user<br><br><br>
     ○ user_id :- primary key, not null, unique, auto increment<br>
     ○ email_id :- not null, unique <br>
-    ○ password :- not null<br>
+    ○ password :- not null<br><br>
 ● bag<br><br><br>
     ○ bag_id :- primary key, not null, unique, auto increment<br>
     ○ user_id :- not null, foreign key(user)<br>
     ○ tprice <br>
-    ○ status :- not null<br>
+    ○ status :- not null<br><br>
 ● shopping_details<br><br>
     ○ sr_no :- primary key, not null, unique, auto increment<br>
     ○ bag_id :- not null, foreign key(bag)<br>
